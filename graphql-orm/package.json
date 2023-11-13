@@ -75,9 +75,17 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/src/",
+      "<rootDir>/libs/"
+    ],
+    "moduleNameMapper": {
+      "^@app/database(|/.*)$": "<rootDir>/libs/database/src/$1"
+    }
   },
   "peerDependencies": {
+    "pg": "^8.11.3",
     "postgresql": "^0.0.1"
   }
 }
