@@ -12,7 +12,7 @@ import { ChatModule } from './chat/chat.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       playground: true,
-      autoSchemaFile: 'src/schema.gql',
+      autoSchemaFile: 'apps/schema.gql',
       path: 'v1/gql',
     }),
     ChatModule,

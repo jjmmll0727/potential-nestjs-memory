@@ -1,3 +1,4 @@
+import { Controller } from '@nestjs/common';
 import { Resolver, Query } from '@nestjs/graphql';
 import { ChatService } from './chat.service';
 import { Message } from './model';
