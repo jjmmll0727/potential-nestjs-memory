@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { getMetadataArgsStorage } from 'typeorm';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { MessageEntity } from './entity';
 
 @Module({
   imports: [
@@ -14,10 +15,11 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
         database: 'postgres',
         schema: 'public',
         keepConnectionAlive: true,
-        entities: getMetadataArgsStorage().tables.map((tbl) => tbl.target),
+        // entities: getMetadataArgsStorage().tables.map((tbl) => tbl.target),
+        entities: [MessageEntity],
         migrations: [],
         subscribers: [],
-        synchronize: false,
+        synchronize: true,
         maxQueryExecutionTime: 10000, // 10초가 지나면 지연 로그 찍힘
         extra: {
           statement_timeout: 10000, // 10초가 지나면 쿼리가 자동 중단됨

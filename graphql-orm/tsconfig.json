@@ -19,10 +19,16 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@app/database": [
-        "libs/database/src"
+        "<rootDir>/libs/database/src"
       ],
       "@app/database/*": [
-        "libs/database/src/*"
+        "<rootDir>/libs/database/src/*"
+      ],
+      "@app/common": [
+        "<rootDir>/libs/common/src"
+      ],
+      "@app/common/*": [
+        "<rootDir>/libs/common/src/*"
       ]
     }
   }

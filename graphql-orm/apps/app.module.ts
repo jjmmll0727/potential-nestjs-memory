@@ -17,7 +17,7 @@ import { PostgresModule } from '../libs/database/src/postgres.module';
       path: 'v1/gql',
     }),
     ChatModule,
-    PostgresModule,
+    // PostgresModule,
   ],
   controllers: [AppController],
   providers: [AppService],
