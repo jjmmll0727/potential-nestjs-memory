@@ -6,7 +6,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ChatResolver } from './chat/chat.resolver';
 import { ChatService } from './chat/chat.service';
 import { ChatModule } from './chat/chat.module';
-import { PostgresModule } from '../libs/database/src/postgres.module';
+import { PostgresModule } from '@app/database';
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import { PostgresModule } from '../libs/database/src/postgres.module';
       path: 'v1/gql',
     }),
     ChatModule,
-    // PostgresModule,
+    PostgresModule,
   ],
   controllers: [AppController],
   providers: [AppService],

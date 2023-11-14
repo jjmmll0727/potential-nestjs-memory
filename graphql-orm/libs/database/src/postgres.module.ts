@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { getMetadataArgsStorage } from 'typeorm';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { MessageEntity } from './entity';
+import { RoomEntity } from './entity/room.entity';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { MessageEntity } from './entity';
         schema: 'public',
         keepConnectionAlive: true,
         // entities: getMetadataArgsStorage().tables.map((tbl) => tbl.target),
-        entities: [MessageEntity],
+        entities: [MessageEntity, RoomEntity],
         migrations: [],
         subscribers: [],
         synchronize: true,
