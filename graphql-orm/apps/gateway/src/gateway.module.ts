@@ -14,6 +14,7 @@ import { IntrospectAndCompose } from '@apollo/gateway';
       driver: ApolloGatewayDriver,
       gateway: {
         supergraphSdl: new IntrospectAndCompose({
+          // 각각의 subGraph 를 하나로 연결 시켜준다.
           subgraphs: [
             {
               name: 'account',

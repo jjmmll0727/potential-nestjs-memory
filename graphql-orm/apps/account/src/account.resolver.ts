@@ -1,4 +1,12 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Int,
+  ResolveReference,
+  Parent,
+} from '@nestjs/graphql';
 import { AccountService } from './account.service';
 import { Account } from './entities/account.entity';
 import { CreateAccountInput } from './dto/create-account.input';
@@ -9,7 +17,9 @@ export class AccountResolver {
   constructor(private readonly accountService: AccountService) {}
 
   @Mutation(() => Account)
-  createAccount(@Args('createAccountInput') createAccountInput: CreateAccountInput) {
+  createAccount(
+    @Args('createAccountInput') createAccountInput: CreateAccountInput,
+  ) {
     return this.accountService.create(createAccountInput);
   }
 
@@ -24,8 +34,13 @@ export class AccountResolver {
   }
 
   @Mutation(() => Account)
-  updateAccount(@Args('updateAccountInput') updateAccountInput: UpdateAccountInput) {
-    return this.accountService.update(updateAccountInput.id, updateAccountInput);
+  updateAccount(
+    @Args('updateAccountInput') updateAccountInput: UpdateAccountInput,
+  ) {
+    return this.accountService.update(
+      updateAccountInput.id,
+      updateAccountInput,
+    );
   }
 
   @Mutation(() => Account)

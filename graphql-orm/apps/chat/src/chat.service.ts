@@ -12,15 +12,7 @@ export class ChatService {
     return `This action returns all chat`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} chat`;
-  }
-
-  update(id: number, updateChatInput: UpdateChatInput) {
-    return `This action updates a #${id} chat`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} chat`;
+  async getChatInfo(roomId: number) {
+    return 'true';
   }
 }
