@@ -5,5 +5,4 @@ import { WsKorGateway } from "./gateway";
     providers: [WsKorGateway, Logger]
 })
 export class WsKorModule {
-
 }

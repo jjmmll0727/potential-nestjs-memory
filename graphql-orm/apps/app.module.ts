@@ -3,10 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { ChatResolver } from './chat/chat.resolver';
-import { ChatService } from './chat/chat.service';
-import { ChatModule } from './chat/chat.module';
+
 import { PostgresModule } from '@app/database';
+import { AccountModule } from './account/account.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -16,8 +16,9 @@ import { PostgresModule } from '@app/database';
       autoSchemaFile: 'apps/schema.gql',
       path: 'v1/gql',
     }),
-    ChatModule,
     PostgresModule,
+    AccountModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],
