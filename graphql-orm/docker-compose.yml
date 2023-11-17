@@ -1,7 +1,7 @@
 version: '3.9'
 
 services:
-  gql-postgres:
+  study-postgres:
     image: postgres:14-alpine
     ports:
       - 5433:5432 ## local 5433 / real database port 5432(fix)

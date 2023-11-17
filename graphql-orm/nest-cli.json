@@ -1,12 +1,51 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps",
+  "sourceRoot": "apps/graphql-orm/src",
   "compilerOptions": {
     "deleteOutDir": true,
-    "webpack": true
+    "webpack": true,
+    "tsConfigPath": "apps/graphql-orm/tsconfig.app.json"
   },
+  "monorepo": true,
+  "root": "apps/graphql-orm",
   "projects": {
+    "graphql-orm": {
+      "type": "application",
+      "root": "apps/graphql-orm",
+      "entryFile": "main",
+      "sourceRoot": "apps/graphql-orm/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/graphql-orm/tsconfig.app.json"
+      }
+    },
+    "gateway": {
+      "type": "application",
+      "root": "apps/gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/gateway/tsconfig.app.json"
+      }
+    },
+    "account": {
+      "type": "application",
+      "root": "apps/account",
+      "entryFile": "main",
+      "sourceRoot": "apps/account/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/account/tsconfig.app.json"
+      }
+    },
+    "chat": {
+      "type": "application",
+      "root": "apps/chat",
+      "entryFile": "main",
+      "sourceRoot": "apps/chat/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/chat/tsconfig.app.json"
+      }
+    },
     "database": {
       "type": "library",
       "root": "libs/database",
