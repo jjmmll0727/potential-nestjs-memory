@@ -15,4 +15,8 @@ export class ChatService {
   async getChatInfo(roomId: number) {
     return 'true';
   }
+
+  findChatList(accountId: string) {
+    return true;
+  }
 }

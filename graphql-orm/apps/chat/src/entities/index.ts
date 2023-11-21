@@ -1,3 +1,2 @@
-export * from './chat.entity';
-export * from './message.model';
-export * from './room.model';
+export * from './chat.model';
+export * from './account.model';

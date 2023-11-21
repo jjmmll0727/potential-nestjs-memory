@@ -2,27 +2,15 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type MessageModel {
-  messageId: Float!
-  userId: Float!
-  roomInfo: RoomModel!
+type ChatModel {
+  chatId: Float!
+  user: AccountModel!
 }
 
-type RoomModel {
-  rooomId: Float!
-  name: String!
+type AccountModel {
+  id: ID!
 }
 
 type Query {
-  chat: [MessageModel!]!
-  getChatInfo(roomId: Int!): MessageModel!
-}
-
-type Mutation {
-  createChat(createChatInput: CreateChatInput!): MessageModel!
-}
-
-input CreateChatInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  getChatInfo(roomId: Int!): ChatModel!
 }

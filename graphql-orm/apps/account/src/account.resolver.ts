@@ -7,33 +7,34 @@ import {
   ResolveReference,
   Parent,
 } from '@nestjs/graphql';
+import { identity } from 'rxjs';
 import { AccountService } from './account.service';
-import { Account } from './entities/account.entity';
 import { CreateAccountInput } from './dto/create-account.input';
 import { UpdateAccountInput } from './dto/update-account.input';
+import { AccountModel } from './entities/account.model';
 
-@Resolver(() => Account)
+@Resolver(() => AccountModel)
 export class AccountResolver {
   constructor(private readonly accountService: AccountService) {}
 
-  @Mutation(() => Account)
+  @Mutation(() => AccountModel)
   createAccount(
     @Args('createAccountInput') createAccountInput: CreateAccountInput,
   ) {
     return this.accountService.create(createAccountInput);
   }
 
-  @Query(() => [Account], { name: 'account' })
+  @Query(() => [AccountModel], { name: 'account' })
   findAll() {
     return this.accountService.findAll();
   }
 
-  @Query(() => Account, { name: 'account' })
+  @Query(() => AccountModel, { name: 'account' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.accountService.findOne(id);
   }
 
-  @Mutation(() => Account)
+  @Mutation(() => AccountModel)
   updateAccount(
     @Args('updateAccountInput') updateAccountInput: UpdateAccountInput,
   ) {
@@ -43,8 +44,26 @@ export class AccountResolver {
     );
   }
 
-  @Mutation(() => Account)
+  @Mutation(() => AccountModel)
   removeAccount(@Args('id', { type: () => Int }) id: number) {
     return this.accountService.remove(id);
+  }
+
+  /**
+   *
+   * @description chat resolver 에서 처리하지 못하는 쿼리를 여기서 처리함 (find account)
+   * resolverField 를 여기서 수신해서 처리한다.
+   */
+  @ResolveReference()
+  resolveReference(reference: {
+    __typename: string;
+    id: string;
+  }): AccountModel {
+    console.log('1 1 1 1 1 1 1 1 1 1 1');
+    return {
+      id: reference.id,
+      name: `${reference.id} + name`,
+    };
+    // return this.accountService.findOne(reference.id);
   }
 }
