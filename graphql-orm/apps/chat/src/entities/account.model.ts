@@ -1,5 +1,4 @@
 import { Directive, Field, ID, ObjectType } from '@nestjs/graphql';
-import { ChatModel } from './chat.model';
 
 @ObjectType()
 @Directive('@key(fields: "id")')

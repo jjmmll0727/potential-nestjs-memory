@@ -5,9 +5,7 @@ import {
   Args,
   Int,
   ResolveReference,
-  Parent,
 } from '@nestjs/graphql';
-import { identity } from 'rxjs';
 import { AccountService } from './account.service';
 import { CreateAccountInput } from './dto/create-account.input';
 import { UpdateAccountInput } from './dto/update-account.input';

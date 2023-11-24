@@ -18,7 +18,7 @@ import {
       driver: ApolloFederationDriver,
       autoSchemaFile: {
         federation: 2,
-        path: './schema.gql',
+        path: 'schema/chat/schema.gql',
       },
       playground: true,
     }),

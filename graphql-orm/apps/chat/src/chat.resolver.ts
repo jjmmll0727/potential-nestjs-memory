@@ -1,16 +1,12 @@
 import {
   Resolver,
   Query,
-  Mutation,
   Args,
   Int,
   ResolveField,
   Parent,
-  ResolveReference,
 } from '@nestjs/graphql';
 import { ChatService } from './chat.service';
-import { CreateChatInput } from './dto/create-chat.input';
-import { UpdateChatInput } from './dto/update-chat.input';
 import { AccountModel, ChatModel } from './entities';
 
 @Resolver(() => ChatModel)

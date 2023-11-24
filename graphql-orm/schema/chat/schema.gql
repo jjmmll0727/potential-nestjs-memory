@@ -1,0 +1,16 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ChatModel {
+  chatId: Float!
+  user: AccountModel!
+}
+
+type AccountModel {
+  id: ID!
+}
+
+type Query {
+  getChatInfo(roomId: Int!): ChatModel!
+}
