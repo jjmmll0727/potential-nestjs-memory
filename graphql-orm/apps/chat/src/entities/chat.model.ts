@@ -1,10 +1,11 @@
 import { Field, ObjectType } from '@nestjs/graphql';
+import { AccountModel } from '.';
 
 @ObjectType()
-export class ChatModel {
+export class RoomModel {
   @Field(() => Number)
-  chatId: number;
+  roomId: number;
 
-  // @Field(() => AccountModel)
-  // user: AccountModel;
+  @Field(() => [AccountModel])
+  users: AccountModel[];
 }

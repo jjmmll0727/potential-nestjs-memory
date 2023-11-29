@@ -2,9 +2,9 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type ChatModel {
-  chatId: Float!
-  user: AccountModel!
+type RoomModel {
+  roomId: Float!
+  users: [AccountModel!]!
 }
 
 type AccountModel {
@@ -12,5 +12,5 @@ type AccountModel {
 }
 
 type Query {
-  getChatInfo(roomId: Int!): ChatModel!
+  getRoomInfo(roomId: Int!): RoomModel!
 }

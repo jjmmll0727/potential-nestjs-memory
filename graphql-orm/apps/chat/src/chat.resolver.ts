@@ -7,9 +7,9 @@ import {
   Parent,
 } from '@nestjs/graphql';
 import { ChatService } from './chat.service';
-import { AccountModel, ChatModel } from './entities';
+import { AccountModel, RoomModel } from './entities';
 
-@Resolver(() => ChatModel)
+@Resolver(() => RoomModel)
 // 이 resolver 는 chatModel 을 뽑아내기 위한 리졸버이다
 export class ChatResolver {
   constructor(private readonly chatService: ChatService) {}
@@ -24,12 +24,13 @@ export class ChatResolver {
   //   return this.chatService.findAll();
   // }
 
-  @Query(() => ChatModel)
-  async getChatInfo(
+  @Query(() => RoomModel)
+  async getRoomInfo(
     @Args('roomId', { type: () => Int }) roomId: number,
-  ): Promise<ChatModel> {
+  ): Promise<RoomModel> {
     return {
-      chatId: roomId,
+      roomId: roomId,
+      users: [],
     };
     // return this.chatService.getChatInfo(roomId);
   }
@@ -37,8 +38,8 @@ export class ChatResolver {
   /**
    * @description user resolver 로 필요한 정보를 얻기 위한 쿼리 전송
    */
-  @ResolveField(() => AccountModel)
-  user(@Parent() chat: ChatModel) {
-    return { __typename: 'UserEntity', id: chat.chatId };
+  @ResolveField('users', () => [AccountModel])
+  async getUsers(@Parent() chat: RoomModel) {
+    return { __typename: 'UserEntity', id: chat.roomId };
   }
 }
