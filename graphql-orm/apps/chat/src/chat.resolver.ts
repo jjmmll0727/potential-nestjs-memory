@@ -39,7 +39,15 @@ export class ChatResolver {
    * @description user resolver 로 필요한 정보를 얻기 위한 쿼리 전송
    */
   @ResolveField('users', () => [AccountModel])
-  async getUsers(@Parent() chat: RoomModel) {
-    return { __typename: 'UserEntity', id: chat.roomId };
+  async getUsers(
+    @Parent() chat: RoomModel,
+  ): Promise<{ __typename: string; id: number }[]> {
+    console.log(chat.roomId);
+    const userIds: number[] = [1, 2, 3];
+    return [
+      { __typename: 'RoomModel', id: userIds[0] },
+      { __typename: 'RoomModel', id: userIds[1] },
+      { __typename: 'RoomModel', id: userIds[2] },
+    ];
   }
 }

@@ -56,13 +56,10 @@ export class AccountResolver {
   resolveReference(reference: {
     __typename: string;
     id: string;
-  }): AccountModel[] {
-    console.log(reference.id);
-    return [
-      {
-        id: reference.id,
-        name: reference.id + ' - name',
-      },
-    ];
+  }): AccountModel {
+    return {
+      id: reference.id,
+      name: `${reference.id} + name`,
+    };
   }
 }
