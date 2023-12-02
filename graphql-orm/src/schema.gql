@@ -22,27 +22,27 @@ directive @inaccessible on FIELD_DEFINITION | OBJECT | INTERFACE | UNION | ARGUM
 
 directive @override(from: String!) on FIELD_DEFINITION
 
-type Account {
+type User {
   """Example field (placeholder)"""
   exampleField: Int!
 }
 
 type Query {
-  account(id: Int!): Account!
+  user(id: Int!): User!
 }
 
 type Mutation {
-  createAccount(createAccountInput: CreateAccountInput!): Account!
-  updateAccount(updateAccountInput: UpdateAccountInput!): Account!
-  removeAccount(id: Int!): Account!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
 }
 
-input CreateAccountInput {
+input CreateUserInput {
   """Example field (placeholder)"""
   exampleField: Int!
 }
 
-input UpdateAccountInput {
+input UpdateUserInput {
   """Example field (placeholder)"""
   exampleField: Int
   id: Int!

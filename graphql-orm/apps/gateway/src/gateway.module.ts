@@ -12,7 +12,7 @@ import { IntrospectAndCompose } from '@apollo/gateway';
           // 각각의 subGraph 를 하나로 연결 시켜준다.
           subgraphs: [
             {
-              name: 'account',
+              name: 'user',
               url: 'http://localhost:3001/graphql',
             },
             {

@@ -2,27 +2,27 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type AccountModel {
+type UserModel {
   id: ID!
   name: String!
 }
 
 type Query {
-  account(id: Int!): AccountModel!
+  user(id: Int!): UserModel!
 }
 
 type Mutation {
-  createAccount(createAccountInput: CreateAccountInput!): AccountModel!
-  updateAccount(updateAccountInput: UpdateAccountInput!): AccountModel!
-  removeAccount(id: Int!): AccountModel!
+  createUser(createUserInput: CreateUserInput!): UserModel!
+  updateUser(updateUserInput: UpdateUserInput!): UserModel!
+  removeUser(id: Int!): UserModel!
 }
 
-input CreateAccountInput {
+input CreateUserInput {
   """Example field (placeholder)"""
   exampleField: Int!
 }
 
-input UpdateAccountInput {
+input UpdateUserInput {
   """Example field (placeholder)"""
   exampleField: Int
   id: Int!

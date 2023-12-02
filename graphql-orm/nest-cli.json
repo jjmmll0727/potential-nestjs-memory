@@ -28,13 +28,13 @@
         "tsConfigPath": "apps/gateway/tsconfig.app.json"
       }
     },
-    "account": {
+    "user": {
       "type": "application",
-      "root": "apps/account",
+      "root": "apps/user",
       "entryFile": "main",
-      "sourceRoot": "apps/account/src",
+      "sourceRoot": "apps/user/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/account/tsconfig.app.json"
+        "tsConfigPath": "apps/user/tsconfig.app.json"
       }
     },
     "chat": {

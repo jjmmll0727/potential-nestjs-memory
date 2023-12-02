@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AccountService } from './account.service';
-import { AccountResolver } from './account.resolver';
+import { UserService } from './user.service';
+import { UserResolver } from './user.resolver';
 import { PostgresModule } from '@app/database';
 import { UserEntity } from '@app/database/entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -17,11 +17,11 @@ import {
       driver: ApolloFederationDriver,
       autoSchemaFile: {
         federation: 2,
-        path: 'schema/account/schema.gql',
+        path: 'schema/user/schema.gql',
       },
       playground: true,
     }),
   ],
-  providers: [AccountResolver, AccountService],
+  providers: [UserResolver, UserService],
 })
-export class AccountModule {}
+export class UserModule {}

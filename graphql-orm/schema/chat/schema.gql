@@ -4,10 +4,10 @@
 
 type RoomModel {
   roomId: Float!
-  users: [AccountModel!]!
+  users: [UserModel!]!
 }
 
-type AccountModel {
+type UserModel {
   id: ID!
 }
 

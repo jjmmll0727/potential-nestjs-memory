@@ -1,11 +1,11 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { AccountModel } from '.';
+import { UserModel } from '.';
 
 @ObjectType()
 export class RoomModel {
   @Field(() => Number)
   roomId: number;
 
-  @Field(() => [AccountModel])
-  users: AccountModel[];
+  @Field(() => [UserModel])
+  users: UserModel[];
 }

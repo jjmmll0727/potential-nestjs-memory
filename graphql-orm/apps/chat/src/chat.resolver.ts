@@ -7,7 +7,7 @@ import {
   Parent,
 } from '@nestjs/graphql';
 import { ChatService } from './chat.service';
-import { AccountModel, RoomModel } from './entities';
+import { UserModel, RoomModel } from './entities';
 
 @Resolver(() => RoomModel)
 // 이 resolver 는 chatModel 을 뽑아내기 위한 리졸버이다
@@ -38,7 +38,7 @@ export class ChatResolver {
   /**
    * @description user resolver 로 필요한 정보를 얻기 위한 쿼리 전송
    */
-  @ResolveField('users', () => [AccountModel])
+  @ResolveField('users', () => [UserModel])
   async getUsers(
     @Parent() chat: RoomModel,
   ): Promise<{ __typename: string; id: number }[]> {
