@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ChatService } from './chat.service';
 import { ChatResolver } from './chat.resolver';
-import { MessageEntity, RoomEntity } from '@app/database/entity';
+import {
+  MessageEntity,
+  RoomEntity,
+  RoomUserEntity,
+} from '@app/database/entity';
 import { PostgresModule } from '@app/database';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -13,7 +17,7 @@ import {
 @Module({
   imports: [
     PostgresModule,
-    TypeOrmModule.forFeature([MessageEntity, RoomEntity]),
+    TypeOrmModule.forFeature([MessageEntity, RoomEntity, RoomUserEntity]),
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: {
