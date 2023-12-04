@@ -2,6 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Query {
+  getRoomInfo(roomId: Int!): [RoomModel!]!
+}
+
 type RoomModel {
   roomId: Float!
   users: [UserModel!]!
@@ -9,8 +13,4 @@ type RoomModel {
 
 type UserModel {
   id: ID!
-}
-
-type Query {
-  getRoomInfo(roomId: Int!): RoomModel!
 }

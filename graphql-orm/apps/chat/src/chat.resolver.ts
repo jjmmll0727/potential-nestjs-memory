@@ -24,14 +24,21 @@ export class ChatResolver {
   //   return this.chatService.findAll();
   // }
 
-  @Query(() => RoomModel)
+  @Query(() => [RoomModel])
   async getRoomInfo(
     @Args('roomId', { type: () => Int }) roomId: number,
-  ): Promise<RoomModel> {
-    return {
-      roomId: roomId,
-      users: [],
-    };
+  ): Promise<RoomModel[]> {
+    return [
+      {
+        roomId: roomId + 1,
+      },
+      {
+        roomId: roomId + 2,
+      },
+      {
+        roomId: roomId + 3,
+      },
+    ];
     // return this.chatService.getChatInfo(roomId);
   }
 
@@ -40,9 +47,9 @@ export class ChatResolver {
    */
   @ResolveField('users', () => [UserModel])
   async getUsers(
-    @Parent() chat: RoomModel,
+    @Parent() room: RoomModel,
   ): Promise<{ __typename: string; id: number }[]> {
-    console.log(chat.roomId);
+    console.log(room.roomId);
     const userIds: number[] = [1, 2, 3];
     return [
       { __typename: 'RoomModel', id: userIds[0] },

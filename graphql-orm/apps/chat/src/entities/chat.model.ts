@@ -6,6 +6,6 @@ export class RoomModel {
   @Field(() => Number)
   roomId: number;
 
-  @Field(() => [UserModel])
-  users: UserModel[];
+  // @Field(() => [UserModel])
+  // users: UserModel[];
 }

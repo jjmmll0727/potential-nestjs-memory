@@ -24,6 +24,7 @@ import {
         federation: 2,
         path: 'schema/chat/schema.gql',
       },
+      sortSchema: true,
       playground: true,
     }),
   ],
