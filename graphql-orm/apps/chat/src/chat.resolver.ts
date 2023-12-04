@@ -59,7 +59,6 @@ export class ChatResolver {
     //   { __typename: 'RoomModel', id: userIds[1] },
     //   { __typename: 'RoomModel', id: userIds[2] },
     // ];
-    console.log('1 1 1 1 1 1 1 1 1 1 1');
-    return this.chatLoader.findByUserId.load(room.roomId);
+    return await this.chatLoader.findByUserId.load(room.roomId);
   }
 }
