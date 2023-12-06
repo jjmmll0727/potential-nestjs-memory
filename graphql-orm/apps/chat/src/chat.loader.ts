@@ -9,19 +9,8 @@ import { UserModel } from './entities/user.model';
 export class ChatLoader {
   findByUserId = new DataLoader<number, UserModel[]>(
     async (roomIds: number[]) => {
-      console.log(roomIds);
-      //   const orderItems: UserModel[] =
-      //     await this.orderItemRepo.findByOrderIds(orderIds);
-      // const userModels: UserModel[] = [
-      //   { id: '1' },
-      //   { id: '2' },
-      //   { id: '3' },
-      //   { id: '4' },
-      //   { id: '5' },
-      //   { id: '6' },
-      // ];
-
-      const userModels2 = {
+      // 여기 있는 roomIds 에 있는 아이템들이 key 가 된다.
+      const userModels = {
         4: [{ id: '4' }, { id: '8' }, { id: '12' }],
         5: [{ id: '5' }, { id: '10' }, { id: '15' }],
         6: [{ id: '6' }, { id: '12' }, { id: '18' }],
@@ -31,17 +20,13 @@ export class ChatLoader {
         if (!userModelGroup[roomId]) {
           userModelGroup[roomId] = [];
         }
-        userModelGroup[roomId] = userModels2[roomId];
+        userModelGroup[roomId] = userModels[roomId] ?? [];
       }
-      // userModels.forEach((userModel: UserModel) => {
-      //   if (!userModelGroup[userModel.id]) {
-      //     userModelGroup[userModel.id] = [];
-      //   }
-      //   userModelGroup[userModel.id].push(userModel);
-      // });
-      console.log(userModelGroup);
-      // console.log(roomIds.map((roomId: number) => userModelGroup[roomId]));
-      return roomIds.map((roomId: number) => userModelGroup[roomId]);
+      const result = roomIds.map((roomId: number) => userModelGroup[roomId]);
+
+      console.log(result);
+      return result;
     },
+    { cache: true },
   );
 }

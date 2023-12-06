@@ -39,7 +39,6 @@ export class ChatResolver {
         roomId: roomId + 3,
       },
     ];
-    // return this.chatService.getChatInfo(roomId);
   }
 
   /**
@@ -49,16 +48,12 @@ export class ChatResolver {
    */
   @ResolveField('users', () => [UserModel])
   async getUsers(@Parent() room: RoomModel): Promise<UserModel[]> {
-    // const userIds: number[] = [
-    //   room.roomId + 1,
-    //   room.roomId + 2,
-    //   room.roomId + 3,
-    // ];
-    // return [
-    //   { __typename: 'RoomModel', id: userIds[0] },
-    //   { __typename: 'RoomModel', id: userIds[1] },
-    //   { __typename: 'RoomModel', id: userIds[2] },
-    // ];
-    return await this.chatLoader.findByUserId.load(room.roomId);
+    try {
+      const result = await this.chatLoader.findByUserId.load(room.roomId);
+      console.log(result);
+      return result;
+    } catch (error) {
+      this.chatLoader.findByUserId.clear(room.roomId);
+    }
   }
 }
