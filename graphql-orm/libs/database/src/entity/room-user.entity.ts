@@ -6,9 +6,9 @@ export class RoomUserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: UUID;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, name: 'room_id' })
   roomId: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, name: 'user_id' })
   userId: string;
 }

@@ -14,6 +14,7 @@ import {
   ApolloFederationDriver,
 } from '@nestjs/apollo';
 import { ChatLoader } from './chat.loader';
+import { RoomUserRepository } from './repository';
 
 @Module({
   imports: [
@@ -29,6 +30,6 @@ import { ChatLoader } from './chat.loader';
       playground: true,
     }),
   ],
-  providers: [ChatResolver, ChatService, ChatLoader],
+  providers: [ChatResolver, ChatService, ChatLoader, RoomUserRepository],
 })
 export class ChatModule {}
