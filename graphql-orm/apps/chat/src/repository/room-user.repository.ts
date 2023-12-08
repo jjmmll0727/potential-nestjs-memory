@@ -13,8 +13,13 @@ export class RoomUserRepository extends Repository<RoomUserEntity> {
   }
 
   async findbyRoomIds(roomIds: string[]): Promise<RoomUserEntity[]> {
-    return await this.createQueryBuilder()
-      .where('room_id in (:roomIds)', { roomIds: roomIds })
-      .getMany();
+    try {
+      const result = await this.createQueryBuilder()
+        .where('room_id in (:...roomIds)', { roomIds: roomIds })
+        .getRawMany();
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 }

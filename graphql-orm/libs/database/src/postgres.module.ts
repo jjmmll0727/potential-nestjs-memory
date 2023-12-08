@@ -28,6 +28,7 @@ import { RoomEntity } from './entity/room.entity';
           connectionTimeoutMillis: 5000,
           idleTimeoutMillis: 1000,
         },
+        logger: 'debug',
       }),
     }),
   ],
