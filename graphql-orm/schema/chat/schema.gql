@@ -2,12 +2,17 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Mutation {
+  createRooom(name: String!): RoomModel!
+}
+
 type Query {
   getAllRoomInfo: [RoomModel!]!
-  user: [UserModel!]!
+  init: [UserModel!]!
 }
 
 type RoomModel {
+  name: String!
   roomId: ID!
   users: [UserModel!]!
 }

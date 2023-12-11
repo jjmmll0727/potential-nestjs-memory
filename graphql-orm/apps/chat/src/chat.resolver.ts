@@ -2,9 +2,9 @@ import {
   Resolver,
   Query,
   Args,
-  Int,
   ResolveField,
   Parent,
+  Mutation,
 } from '@nestjs/graphql';
 import { ChatLoader } from './chat.loader';
 import { ChatService } from './chat.service';
@@ -18,7 +18,7 @@ export class ChatResolver {
     private readonly chatLoader: ChatLoader,
   ) {}
 
-  @Query(() => [UserModel], { name: 'user' })
+  @Query(() => [UserModel])
   init() {}
 
   /**
@@ -29,6 +29,11 @@ export class ChatResolver {
   @Query(() => [RoomModel])
   async getAllRoomInfo(): Promise<RoomModel[]> {
     return await this.chatService.getAllRoomIds();
+  }
+
+  @Mutation(() => RoomModel)
+  async createRooom(@Args('name') name: string): Promise<RoomModel> {
+    return await this.chatService.createRoom(name);
   }
 
   /**

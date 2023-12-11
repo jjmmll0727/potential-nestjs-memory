@@ -1,5 +1,4 @@
-import { Injectable } from '@nestjs/common';
-import { RoomEntity } from 'lib/database/entity';
+import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { RoomModel } from './entities';
 import { RoomRepository } from './repository';
 
@@ -19,5 +18,13 @@ export class ChatService {
       });
     }
     return result;
+  }
+
+  async createRoom(name: string): Promise<RoomModel> {
+    const result = await this.roomRepo.createRoom(name);
+    console.log(result);
+    return {
+      roomId: 'qq',
+    };
   }
 }
