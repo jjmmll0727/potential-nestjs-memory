@@ -23,20 +23,12 @@ export class ChatResolver {
 
   /**
    *
-   * @description 채팅방 하나에 여러명의 사람이 있다고 가정을 해보자
-   * 채팅방 id가 1이면 userId 는 2,3,4
+   * @description 전체 채팅방과 그 안에 포함된 유저들의 정보를 불러오자
    */
 
   @Query(() => [RoomModel])
   async getAllRoomInfo(): Promise<RoomModel[]> {
-    const result = await this.chatService.getAllRoomIds();
-    const room: RoomModel[] = [];
-    for (const r of result) {
-      room.push({
-        roomId: r.id.toString(),
-      });
-    }
-    return room;
+    return await this.chatService.getAllRoomIds();
   }
 
   /**
