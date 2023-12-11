@@ -16,7 +16,7 @@ export class RoomUserRepository extends Repository<RoomUserEntity> {
     try {
       const result = await this.createQueryBuilder()
         .where('room_id in (:...roomIds)', { roomIds: roomIds })
-        .getRawMany();
+        .getMany();
       return result;
     } catch (error) {
       throw error;

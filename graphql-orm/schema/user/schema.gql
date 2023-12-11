@@ -2,25 +2,8 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-input CreateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-type Mutation {
-  createUser(createUserInput: CreateUserInput!): UserModel!
-  removeUser(id: Int!): UserModel!
-  updateUser(updateUserInput: UpdateUserInput!): UserModel!
-}
-
 type Query {
-  user(id: Int!): UserModel!
-}
-
-input UpdateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  user: [UserModel!]!
 }
 
 type UserModel {

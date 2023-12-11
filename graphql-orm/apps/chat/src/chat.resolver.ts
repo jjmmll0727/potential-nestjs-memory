@@ -18,6 +18,9 @@ export class ChatResolver {
     private readonly chatLoader: ChatLoader,
   ) {}
 
+  @Query(() => [UserModel], { name: 'user' })
+  init() {}
+
   /**
    *
    * @description 채팅방 하나에 여러명의 사람이 있다고 가정을 해보자
@@ -25,20 +28,15 @@ export class ChatResolver {
    */
 
   @Query(() => [RoomModel])
-  async getRoomInfo(
-    @Args('roomId', { type: () => Int }) roomId: number,
-  ): Promise<RoomModel[]> {
-    return [
-      {
-        roomId: roomId + 1,
-      },
-      {
-        roomId: roomId + 2,
-      },
-      {
-        roomId: roomId + 3,
-      },
-    ];
+  async getAllRoomInfo(): Promise<RoomModel[]> {
+    const result = await this.chatService.getAllRoomIds();
+    const room: RoomModel[] = [];
+    for (const r of result) {
+      room.push({
+        roomId: r.id.toString(),
+      });
+    }
+    return room;
   }
 
   /**
@@ -50,7 +48,6 @@ export class ChatResolver {
   async getUsers(@Parent() room: RoomModel): Promise<UserModel[]> {
     try {
       const result = await this.chatLoader.findByUserId.load(room.roomId);
-      console.log(result);
       return result;
     } catch (error) {
       this.chatLoader.findByUserId.clear(room.roomId);

@@ -3,11 +3,12 @@
 # ------------------------------------------------------
 
 type Query {
-  getRoomInfo(roomId: Int!): [RoomModel!]!
+  getAllRoomInfo: [RoomModel!]!
+  user: [UserModel!]!
 }
 
 type RoomModel {
-  roomId: Float!
+  roomId: ID!
   users: [UserModel!]!
 }
 

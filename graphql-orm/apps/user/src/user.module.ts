@@ -9,6 +9,7 @@ import {
   ApolloFederationDriverConfig,
   ApolloFederationDriver,
 } from '@nestjs/apollo';
+import { UserRepository } from './repository';
 @Module({
   imports: [
     PostgresModule,
@@ -23,6 +24,6 @@ import {
       playground: true,
     }),
   ],
-  providers: [UserResolver, UserService],
+  providers: [UserResolver, UserService, UserRepository],
 })
 export class UserModule {}
