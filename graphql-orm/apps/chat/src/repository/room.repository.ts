@@ -5,11 +5,7 @@ import { DataSource, Repository } from 'typeorm';
 @Injectable()
 export class RoomRepository extends Repository<RoomEntity> {
   constructor(private dataSource: DataSource) {
-    super(
-      RoomEntity,
-      dataSource.createEntityManager(),
-      dataSource.createQueryRunner(),
-    );
+    super(RoomEntity, dataSource.createEntityManager());
   }
 
   async getAllRoomIds(): Promise<RoomEntity[]> {
@@ -21,19 +17,17 @@ export class RoomRepository extends Repository<RoomEntity> {
   }
 
   async createRoom(name: string): Promise<RoomEntity> {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
     try {
-      await this.queryRunner.startTransaction();
-      const result = this.save({ name: name });
-      // await this.queryRunner.commitTransaction();
-      await this.queryRunner.commitTransaction();
+      const result = await queryRunner.manager.save(RoomEntity, { name: name });
+      await queryRunner.commitTransaction();
       return result;
     } catch (error) {
-      // await this.queryRunner.rollbackTransaction();
-      await this.queryRunner.rollbackTransaction();
+      await queryRunner.rollbackTransaction();
     } finally {
-      // await this.queryRunner.rollbackTransaction();
-      // await this.queryRunner.release();
-      // queryRunner.release();
+      await queryRunner.release();
     }
   }
 }

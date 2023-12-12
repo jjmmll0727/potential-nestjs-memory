@@ -1,4 +1,4 @@
-import { ConsoleLogger, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { RoomModel } from './entities';
 import { RoomRepository } from './repository';
 
@@ -22,9 +22,9 @@ export class ChatService {
 
   async createRoom(name: string): Promise<RoomModel> {
     const result = await this.roomRepo.createRoom(name);
-    console.log(result);
     return {
-      roomId: 'qq',
+      roomId: result.id.toString(),
+      name: result.name,
     };
   }
 }
