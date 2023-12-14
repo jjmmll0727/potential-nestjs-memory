@@ -1,22 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import { RoomEntity } from 'lib/database/entity';
-import { DataSource, Repository } from 'typeorm';
+import { DataSource, EntityManager, Repository } from 'typeorm';
 
 @Injectable()
 export class RoomRepository extends Repository<RoomEntity> {
   constructor(private dataSource: DataSource) {
-    super(RoomEntity, dataSource.createEntityManager());
+    super(
+      RoomEntity,
+      dataSource.createEntityManager(),
+      dataSource.createQueryRunner(),
+    );
   }
 
   async getAllRoomIds(): Promise<RoomEntity[]> {
-    return await this.createQueryBuilder().getMany();
+    return await this.find();
   }
 
   async getRoom(id: string): Promise<RoomEntity> {
-    return await this.createQueryBuilder().where({ id: id }).getOne();
+    return await this.findOne({
+      where: {
+        id: id,
+      },
+    });
   }
 
-  async createRoom(name: string): Promise<RoomEntity> {
+  /**
+   *
+   * @deprecated 다른 방법으로 트랜잭션 관리
+   */
+  async createRoom2(name: string): Promise<RoomEntity> {
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
@@ -28,6 +40,20 @@ export class RoomRepository extends Repository<RoomEntity> {
       await queryRunner.rollbackTransaction();
     } finally {
       await queryRunner.release();
+    }
+  }
+
+  async createRoom(name: any): Promise<void> {
+    try {
+      await this.manager.transaction(async (entityManager) => {
+        try {
+          await entityManager.save(RoomEntity, { name: name });
+        } catch (error) {
+          throw new Error('duplicated key');
+        }
+      });
+    } catch (error) {
+      throw error;
     }
   }
 }

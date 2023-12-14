@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 type Mutation {
-  createRooom(name: String!): RoomModel!
+  createRooom(name: String!): Boolean!
 }
 
 type Query {

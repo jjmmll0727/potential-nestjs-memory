@@ -1,11 +1,10 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { UUID } from 'typeorm/driver/mongodb/bson.typings';
 
 @Entity('room')
 export class RoomEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: UUID;
+  id: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, unique: true })
   name: string;
 }

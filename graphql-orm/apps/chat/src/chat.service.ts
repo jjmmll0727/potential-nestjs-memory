@@ -20,11 +20,19 @@ export class ChatService {
     return result;
   }
 
-  async createRoom(name: string): Promise<RoomModel> {
-    const result = await this.roomRepo.createRoom(name);
-    return {
-      roomId: result.id.toString(),
-      name: result.name,
-    };
+  async createRoom(name: string): Promise<void> {
+    try {
+      await this.roomRepo.createRoom(name);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async controlTransaction(
+    input: any,
+    func: (input: any) => Promise<any>,
+  ): Promise<any> {
+    const result = await func(input);
+    return result;
   }
 }

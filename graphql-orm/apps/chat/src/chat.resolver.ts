@@ -31,9 +31,14 @@ export class ChatResolver {
     return await this.chatService.getAllRoomIds();
   }
 
-  @Mutation(() => RoomModel)
-  async createRooom(@Args('name') name: string): Promise<RoomModel> {
-    return await this.chatService.createRoom(name);
+  @Mutation(() => Boolean)
+  async createRooom(@Args('name') name: string): Promise<boolean> {
+    try {
+      await this.chatService.createRoom(name);
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 
   /**
