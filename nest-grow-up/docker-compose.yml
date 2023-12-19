@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  study-postgres:
+    image: postgres:14-alpine
+    ports:
+      - 5433:5432 ## local 5433 / real database port 5432(fix)
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=jami
+      - POSTGRES_USER=jami
+      - POSTGRES_DB=postgres
