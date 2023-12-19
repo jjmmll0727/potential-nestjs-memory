@@ -9,4 +9,9 @@ export class GatewayController {
   getHello(): string {
     return this.gatewayService.getHello();
   }
+
+  // @Get('test')
+  // test(): string {
+  //   return this.
+  // }
 }
