@@ -7,6 +7,10 @@ async function bootstrap() {
     PostModule,
     {
       transport: Transport.TCP,
+      options: {
+        host: '127.0.0.1',
+        port: 8082,
+      },
     },
   );
   await app.listen();

@@ -1,12 +1,15 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Inject } from '@nestjs/common';
 import { UserService } from './user.service';
+import { MessagePattern } from '@nestjs/microservices';
 
 @Controller()
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    @Inject('USER_SERVICE') private readonly userService: UserService,
+  ) {}
 
-  @Get()
-  getHello(): string {
-    return this.userService.getHello();
+  @MessagePattern('test')
+  test(): string {
+    return 'test입니다';
   }
 }
