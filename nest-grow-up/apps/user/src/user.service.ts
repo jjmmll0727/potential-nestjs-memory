@@ -12,4 +12,8 @@ export class UserService {
   async createUser(input: CreateUserInput) {
     await this.userRepo.createUser(input);
   }
+
+  async getUsers() {
+    return await this.userRepo.getUsers();
+  }
 }

@@ -16,4 +16,9 @@ export class UserController {
   async createUser(input: CreateUserInput): Promise<void> {
     await this.userService.createUser(input);
   }
+
+  @MessagePattern('getUsers')
+  async getUsers() {
+    return await this.userService.getUsers();
+  }
 }

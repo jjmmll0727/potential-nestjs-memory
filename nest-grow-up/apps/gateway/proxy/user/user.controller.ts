@@ -16,6 +16,11 @@ export class UserController {
     this.client.emit('createUser', input);
   }
 
+  @Get('users')
+  async getUsers() {
+    return this.client.send('getUsers', 'getUsers');
+  }
+
   @Get()
   test(): Observable<string> {
     return this.client.send('test', 'test22');
