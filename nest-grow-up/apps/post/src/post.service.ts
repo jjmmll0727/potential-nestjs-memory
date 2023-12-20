@@ -1,8 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { CreatePostInput } from './dto/request';
+import { PostRepository } from './repository/post.repository';
 
 @Injectable()
 export class PostService {
-  getHello(): string {
-    return 'Hello World!';
+  constructor(private readonly postRepo: PostRepository) {}
+
+  async createPost(input: CreatePostInput) {
+    await this.postRepo.createPost(input);
   }
 }
