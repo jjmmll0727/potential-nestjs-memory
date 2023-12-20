@@ -4,19 +4,10 @@ import {
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { BaseEntity } from './base.entity';
 
 @Entity('company')
-export class CompanyEntity {
-  @PrimaryGeneratedColumn('increment')
-  id: string;
-
+export class CompanyEntity extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', name: 'name' })
   name: string;
-
-  @CreateDateColumn({
-    nullable: false,
-    type: 'timestamp with time zone',
-    name: 'create_date',
-  })
-  createDate: Date;
 }

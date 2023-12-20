@@ -1,12 +1,13 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import { PostService } from './post.service';
+import { MessagePattern } from '@nestjs/microservices';
 
 @Controller()
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
-  @Get()
-  getHello(): string {
-    return this.postService.getHello();
+  @MessagePattern('createPost')
+  createPost(input: any) {
+    this.postService.getHello();
   }
 }

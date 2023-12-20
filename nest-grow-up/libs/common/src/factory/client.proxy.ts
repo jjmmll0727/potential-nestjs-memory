@@ -13,4 +13,17 @@ const USER_FACTORY = {
   },
 };
 
-export { USER_FACTORY };
+const POST_FACTORY = {
+  provide: 'POST_SERVICE',
+  useFactory: () => {
+    return ClientProxyFactory.create({
+      transport: Transport.TCP,
+      options: {
+        host: '127.0.0.1',
+        port: 8082,
+      },
+    });
+  },
+};
+
+export { USER_FACTORY, POST_FACTORY };

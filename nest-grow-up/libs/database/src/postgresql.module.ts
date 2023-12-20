@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CompanyEntity, UserEntity } from './entity';
+import { CompanyEntity, PostEntity, UserEntity } from './entity';
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import { CompanyEntity, UserEntity } from './entity';
         database: 'nest-grow-up',
         schema: 'public',
         keepConnectionAlive: true,
-        entities: [UserEntity, CompanyEntity],
+        entities: [UserEntity, CompanyEntity, PostEntity],
         migrations: [],
         subscribers: [],
         synchronize: true,

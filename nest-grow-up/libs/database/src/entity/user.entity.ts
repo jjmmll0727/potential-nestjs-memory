@@ -7,22 +7,13 @@ import {
   OneToOne,
   ManyToOne,
 } from 'typeorm';
+import { BaseEntity } from './base.entity';
 import { CompanyEntity } from './company.entity';
 
 @Entity('user')
-export class UserEntity {
-  @PrimaryGeneratedColumn('increment')
-  id: string;
-
+export class UserEntity extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', name: 'name' })
   name: string;
-
-  @CreateDateColumn({
-    nullable: false,
-    type: 'timestamp with time zone',
-    name: 'create_date',
-  })
-  createDate: Date;
 
   // manytoone 의 기본은 무조건 참조 테이블의 pk 를 바라본다.
   @ManyToOne(() => CompanyEntity)
