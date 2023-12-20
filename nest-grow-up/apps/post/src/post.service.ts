@@ -9,4 +9,8 @@ export class PostService {
   async createPost(input: CreatePostInput) {
     await this.postRepo.createPost(input);
   }
+
+  async getAllPost() {
+    return await this.postRepo.getAllPost();
+  }
 }

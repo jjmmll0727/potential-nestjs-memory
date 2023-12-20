@@ -24,13 +24,22 @@ export class PostRepository extends Repository<PostEntity> {
           await entityManager.save(PostEntity, {
             title: input.title,
             description: input.description,
+            userId: input.userId,
           });
         } catch (error) {
-          throw new Error('fail to insert');
+          throw new Error(error);
         }
       });
     } catch (error) {
       throw error;
     }
+  }
+
+  async getAllPost() {
+    const posts = await this.createQueryBuilder('post')
+      .innerJoinAndSelect('post.userId', 'user')
+      .leftJoinAndSelect('user.companyId', 'company')
+      .getMany();
+    return posts;
   }
 }

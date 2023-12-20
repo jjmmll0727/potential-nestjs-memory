@@ -11,4 +11,9 @@ export class PostController {
   createPost(input: CreatePostInput) {
     this.postService.createPost(input);
   }
+
+  @MessagePattern('getAllPost')
+  async getAllPost() {
+    return await this.postService.getAllPost();
+  }
 }
