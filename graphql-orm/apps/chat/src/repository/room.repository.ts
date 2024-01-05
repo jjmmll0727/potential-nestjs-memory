@@ -12,6 +12,10 @@ export class RoomRepository extends Repository<RoomEntity> {
     );
   }
 
+  /**
+   *
+   * @returns 존재하는 모든 방 정보를 조회
+   */
   async getAllRoomIds(): Promise<RoomEntity[]> {
     return await this.find();
   }

@@ -16,7 +16,7 @@ import { IntrospectAndCompose } from '@apollo/gateway';
               url: 'http://localhost:3001/graphql',
             },
             {
-              name: 'talk',
+              name: 'chat',
               url: 'http://localhost:3002/graphql',
             },
           ],
