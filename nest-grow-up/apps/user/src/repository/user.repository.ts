@@ -46,7 +46,6 @@ export class UserRepository extends Repository<UserEntity> {
       )
       .orderBy('user.id', 'DESC')
       .getMany();
-    console.log(users2);
     return users1;
   }
 }
