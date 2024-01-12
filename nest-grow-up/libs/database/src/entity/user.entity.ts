@@ -9,8 +9,9 @@ import {
 } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { CompanyEntity } from './company.entity';
+import { GymEntity } from './gym.entity';
 
-@Entity('user')
+@Entity({ database: 'nest-grow-up', name: 'user' })
 export class UserEntity extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', name: 'name' })
   name: string;
@@ -19,4 +20,7 @@ export class UserEntity extends BaseEntity {
   @ManyToOne(() => CompanyEntity)
   @JoinColumn({ name: 'company_id' })
   companyId: number;
+
+  @Column({ type: 'integer', name: 'gym_id', nullable: true })
+  gymId: number;
 }

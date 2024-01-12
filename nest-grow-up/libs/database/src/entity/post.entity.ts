@@ -9,7 +9,7 @@ import {
 import { BaseEntity } from './base.entity';
 import { UserEntity } from './user.entity';
 
-@Entity('post')
+@Entity({ database: 'nest-grow-up', name: 'post' })
 export class PostEntity extends BaseEntity {
   @Column({ type: 'varchar', nullable: false, name: 'title' })
   title: string;

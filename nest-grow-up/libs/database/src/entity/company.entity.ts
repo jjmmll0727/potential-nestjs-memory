@@ -6,7 +6,7 @@ import {
 } from 'typeorm';
 import { BaseEntity } from './base.entity';
 
-@Entity('company')
+@Entity({ database: 'nest-grow-up', name: 'company' })
 export class CompanyEntity extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', name: 'name' })
   name: string;

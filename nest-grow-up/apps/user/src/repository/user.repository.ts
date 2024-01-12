@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CompanyEntity, UserEntity } from 'libs/database/src/entity';
+import { CompanyEntity, GymEntity, UserEntity } from 'libs/database/src/entity';
 import { DataSource, Repository } from 'typeorm';
 import { CreateUserInput } from '../dto/request';
 import { UserOutput } from '../dto/response';
@@ -33,6 +33,8 @@ export class UserRepository extends Repository<UserEntity> {
   }
 
   async getUsers(): Promise<UserEntity[]> {
+    const test = await this.getGymListWithUser();
+    console.log(test);
     const users1: UserEntity[] = await this.createQueryBuilder('user')
       .leftJoinAndSelect('user.companyId', 'company')
       .orderBy('user.createDate', 'DESC')
@@ -46,6 +48,14 @@ export class UserRepository extends Repository<UserEntity> {
       )
       .orderBy('user.id', 'DESC')
       .getMany();
-    return users1;
+    return users2;
+  }
+
+  async getGymListWithUser() {
+    const result = await this.createQueryBuilder('user')
+      .leftJoinAndSelect(GymEntity, 'gym', 'gym.id = user.gym_id')
+      .getMany();
+
+    return result;
   }
 }
