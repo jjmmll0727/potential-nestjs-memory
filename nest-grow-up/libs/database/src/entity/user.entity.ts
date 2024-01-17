@@ -11,7 +11,7 @@ import { BaseEntity } from './base.entity';
 import { CompanyEntity } from './company.entity';
 import { GymEntity } from './gym.entity';
 
-@Entity({ database: 'nest-grow-up', name: 'user' })
+@Entity({ database: 'nest-grow-up', name: 'user', schema: 'public' })
 export class UserEntity extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', name: 'name' })
   name: string;

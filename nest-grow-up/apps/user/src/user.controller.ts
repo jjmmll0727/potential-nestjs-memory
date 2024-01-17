@@ -26,8 +26,8 @@ export class UserController {
 
   @MessagePattern('getUsers')
   async getUsers() {
-    this.eventEmitter.emit('sse-test');
-    console.log(this.eventEmitter);
+    // this.eventEmitter.emit('sse-test');
+    // console.log(this.eventEmitter);
     return await this.userService.getUsers();
   }
 
