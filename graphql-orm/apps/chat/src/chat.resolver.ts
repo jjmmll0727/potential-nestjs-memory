@@ -49,7 +49,8 @@ export class ChatResolver {
   @ResolveField('users', () => [UserModel])
   async getUsers(@Parent() room: RoomModel): Promise<UserModel[]> {
     try {
-      const result = await this.chatLoader.findByUserId.load(room.roomId);
+      const result = await this.chatLoader.findByUserId.load(room.roomId); // 주어진 roomId 로 해당 room 에 있는 user 들의 id 를 조회
+      console.log(result);
       return result;
     } catch (error) {
       this.chatLoader.findByUserId.clear(room.roomId);

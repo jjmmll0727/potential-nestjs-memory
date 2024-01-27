@@ -30,7 +30,6 @@ export class ChatLoader {
         userModelGroup[roomId] = userInfo ?? [];
       }
       const result = roomIds.map((roomId: string) => userModelGroup[roomId]);
-
       return result;
     },
     { cache: true },

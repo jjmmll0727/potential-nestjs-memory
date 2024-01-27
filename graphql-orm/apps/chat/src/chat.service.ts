@@ -15,6 +15,7 @@ export class ChatService {
     for (const r of rooms) {
       result.push({
         roomId: r.id.toString(),
+        name: r.name,
       });
     }
     return result;

@@ -70,15 +70,13 @@ import { UserOutput } from '../dto/response';
 // }
 
 @Injectable()
-export class UserRepository extends BaseEntity {
+export class UserRepository {
   constructor(
     @InjectEntityManager()
     private readonly entityManager: EntityManager,
     @InjectEntityManager('two')
     private readonly entityManager2: EntityManager,
-  ) {
-    super();
-  }
+  ) {}
 
   async createUser(input: CreateUserInput): Promise<void> {
     try {
@@ -101,6 +99,18 @@ export class UserRepository extends BaseEntity {
     const gymList = await this.getGymList();
     console.log(gymList);
 
+    const users2: UserEntity[] = await this.entityManager
+      .getRepository(UserEntity)
+      .createQueryBuilder('user')
+      .leftJoinAndSelect(
+        CompanyEntity,
+        'company',
+        'company.id = user.companyId',
+      )
+      .orderBy('user.id', 'DESC')
+      .getMany();
+    console.log(users2);
+
     const user: UserEntity[] = await this.entityManager
       .getRepository(UserEntity)
       .createQueryBuilder('user')
@@ -108,39 +118,13 @@ export class UserRepository extends BaseEntity {
       .orderBy('user.createDate', 'DESC')
       .getMany();
 
-    // const user = await this.entityManager
-    //   .getRepository(UserEntity)
-    //   .createQueryBuilder('user')
-    //   .leftJoinAndSelect('GymEntity', 'gym', 'gym.id = user.gym_id')
-    //   .getMany();
-    // const users2: UserEntity[] = await this.entityManager
-    //   .createQueryBuilder()
-    //   .leftJoinAndSelect(
-    //     CompanyEntity,
-    //     'company',
-    //     'company.id = user.companyId',
-    //   )
-    //   .orderBy('user.id', 'DESC')
-    //   .getMany();
     return user;
   }
 
   async getGymList() {
-    // const result = await this.dataSource
-    //   .getRepository(UserEntity)
-    //   .createQueryBuilder('user')
-    //   .innerJoinAndSelect(GymEntity, 'gym', 'gym.id = user.gym_id')
-    //   // .select()
-    //   // .from(UserEntity, 'user')
-    //   // .addFrom(GymEntity, 'gym')
-    //   // .andWhere('gym.id = user.gym_id')
-    //   .getMany();
-
     const result = await this.entityManager2
       .getRepository(GymEntity)
       .createQueryBuilder('gym')
-      // .createQueryBuilder('user')
-      // .leftJoinAndSelect(GymEntity, 'gym', 'gym.id = user.gym_id')
       .getMany();
     return result;
   }

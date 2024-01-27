@@ -7,7 +7,6 @@ export class UserModel {
   @Field(() => ID)
   @Directive('@external')
   id: string;
-
   // @Field(() => [ChatModel])
   // chat: ChatModel[];
 }
