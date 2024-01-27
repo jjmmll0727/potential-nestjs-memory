@@ -97,7 +97,6 @@ export class UserRepository {
 
   async getUsers(): Promise<UserEntity[]> {
     const gymList = await this.getGymList();
-    console.log(gymList);
 
     const users2: UserEntity[] = await this.entityManager
       .getRepository(UserEntity)
@@ -109,7 +108,6 @@ export class UserRepository {
       )
       .orderBy('user.id', 'DESC')
       .getMany();
-    console.log(users2);
 
     const user: UserEntity[] = await this.entityManager
       .getRepository(UserEntity)

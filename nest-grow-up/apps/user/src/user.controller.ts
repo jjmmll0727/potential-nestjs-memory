@@ -30,18 +30,4 @@ export class UserController {
     // console.log(this.eventEmitter);
     return await this.userService.getUsers();
   }
-
-  /**
-   * @description sse 는 백단에서 발생한 어떠한 이벤트에 의해 프론트로 액션을 해줄때 사용한다. ex) 주식 변동 및 트위터 알림
-   * sse 는 client 는 데이터를 받을 수만 있다.
-   */
-  @Sse('sse')
-  sse(): Observable<MessageEvent> {
-    console.log('1 1 1 1 1 1 1 1 1 1 1');
-    return fromEvent(this.eventEmitter, 'sse-test').pipe(
-      map((d) => {
-        return new MessageEvent('sse-test', { data: 'sse-test' });
-      }),
-    );
-  }
 }

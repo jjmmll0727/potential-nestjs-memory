@@ -1,10 +1,22 @@
-import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Inject,
+  Post,
+  Sse,
+  MessageEvent,
+} from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { ClientProxy } from '@nestjs/microservices';
-import { Observable } from 'rxjs';
+import { fromEvent, interval, map, Observable } from 'rxjs';
 
 @Controller('user')
 export class UserController {
-  constructor(@Inject('USER_SERVICE') protected client: ClientProxy) {}
+  constructor(
+    @Inject('USER_SERVICE') protected client: ClientProxy,
+    private readonly eventEmitter: EventEmitter2,
+  ) {}
 
   /**
    * @description
@@ -14,6 +26,8 @@ export class UserController {
   @Post()
   async createUser(@Body() input: any): Promise<void> {
     this.client.emit('createUser', input);
+    const num = Math.random();
+    this.eventEmitter.emit('create-user', num);
   }
 
   @Get('users')
@@ -24,5 +38,17 @@ export class UserController {
   @Get()
   test(): Observable<string> {
     return this.client.send('test', 'test22');
+  }
+
+  /**
+   * @description sse 는 백단에서 발생한 어떠한 이벤트에 의해 프론트로 액션을 해줄때 사용한다. ex) 주식 변동 및 트위터 알림
+   * sse 는 client 는 데이터를 받을 수만 있다.
+   */
+  @Sse('sse')
+  sse(): Observable<MessageEvent> {
+    // return interval(1000).pipe(map((_) => ({ data: { hello: 'world' } })));
+    return fromEvent(this.eventEmitter, 'create-user').pipe(
+      map((_data) => ({ data: { type: 'new user', randomNum: _data } })),
+    );
   }
 }
