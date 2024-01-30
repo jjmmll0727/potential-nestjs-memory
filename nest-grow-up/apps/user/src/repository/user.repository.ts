@@ -109,6 +109,7 @@ export class UserRepository {
       .orderBy('user.id', 'DESC')
       .getMany();
 
+    console.log(users2);
     const user: UserEntity[] = await this.entityManager
       .getRepository(UserEntity)
       .createQueryBuilder('user')

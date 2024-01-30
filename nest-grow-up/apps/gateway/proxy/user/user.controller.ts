@@ -6,6 +6,7 @@ import {
   Post,
   Sse,
   MessageEvent,
+  Param,
 } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { ClientProxy } from '@nestjs/microservices';
@@ -26,8 +27,9 @@ export class UserController {
   @Post()
   async createUser(@Body() input: any): Promise<void> {
     this.client.emit('createUser', input);
-    const num = Math.random();
-    this.eventEmitter.emit('create-user', num);
+    const num = Math.ceil(Math.random() * 10);
+    console.log(num % 2);
+    this.eventEmitter.emit('create-user', num % 2);
   }
 
   @Get('users')
@@ -44,11 +46,16 @@ export class UserController {
    * @description sse 는 백단에서 발생한 어떠한 이벤트에 의해 프론트로 액션을 해줄때 사용한다. ex) 주식 변동 및 트위터 알림
    * sse 는 client 는 데이터를 받을 수만 있다.
    */
-  @Sse('sse')
-  sse(): Observable<MessageEvent> {
+  @Sse('sse/:topicId')
+  sse(@Param('topicId') topicId: number): Observable<MessageEvent> {
     // return interval(1000).pipe(map((_) => ({ data: { hello: 'world' } })));
     return fromEvent(this.eventEmitter, 'create-user').pipe(
-      map((_data) => ({ data: { type: 'new user', randomNum: _data } })),
+      map((_data) => {
+        console.log(_data, topicId);
+        if (_data == topicId) {
+          return { data: { type: 'new user', randomNum: _data } };
+        }
+      }),
     );
   }
 }
